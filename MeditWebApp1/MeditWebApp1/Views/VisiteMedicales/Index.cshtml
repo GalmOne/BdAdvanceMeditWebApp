@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MeditWebApp1.Models.VisiteMedicale>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dateVisite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Emploi.Profession)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MedecinResponsable.idPersonne)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeLieu.description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateVisite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Emploi.Profession)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MedecinResponsable.idPersonne)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeLieu.description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idVisite }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idVisite }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idVisite })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,58 @@
+﻿@model MeditWebApp1.Models.ExamenPratique
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ExamenPratique</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.duree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.duree)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.resultat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.resultat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prixTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prixTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Examan.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Examan.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VisiteMedicale.idVisite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VisiteMedicale.idVisite)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idExaPrat }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

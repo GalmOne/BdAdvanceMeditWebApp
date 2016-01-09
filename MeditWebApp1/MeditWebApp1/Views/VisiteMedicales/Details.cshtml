@@ -1,0 +1,50 @@
+﻿@model MeditWebApp1.Models.VisiteMedicale
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VisiteMedicale</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dateVisite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateVisite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Emploi.Profession)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Emploi.Profession)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MedecinResponsable.idPersonne)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MedecinResponsable.idPersonne)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeLieu.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeLieu.description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idVisite }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

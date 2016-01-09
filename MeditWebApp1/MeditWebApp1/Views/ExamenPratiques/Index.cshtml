@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MeditWebApp1.Models.ExamenPratique>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.duree)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.resultat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prixTotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Examan.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VisiteMedicale.idVisite)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.duree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.resultat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prixTotal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Examan.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VisiteMedicale.idVisite)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idExaPrat }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idExaPrat }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idExaPrat })
+        </td>
+    </tr>
+}
+
+</table>

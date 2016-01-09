@@ -1,0 +1,868 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MeditModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Correspondance">
+          <Key>
+            <PropertyRef Name="codeExamen" />
+            <PropertyRef Name="codeRisque" />
+          </Key>
+          <Property Name="codeExamen" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="codeRisque" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Emploi">
+          <Key>
+            <PropertyRef Name="codeEmploi" />
+          </Key>
+          <Property Name="codeEmploi" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="dateEntre" Type="date" />
+          <Property Name="dateSortie" Type="date" />
+          <Property Name="idPersonne" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="Profession" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Examen">
+          <Key>
+            <PropertyRef Name="codeExamen" />
+          </Key>
+          <Property Name="codeExamen" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prixSoumis" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="prixNonSoumis" Type="numeric" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="ExamenPratique">
+          <Key>
+            <PropertyRef Name="idExaPrat" />
+          </Key>
+          <Property Name="idExaPrat" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="idVisite" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="codeExamen" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="duree" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="resultat" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prixTotal" Type="numeric" Precision="7" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Exposition">
+          <Key>
+            <PropertyRef Name="codeRisque" />
+            <PropertyRef Name="codeEmploi" />
+          </Key>
+          <Property Name="codeRisque" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="codeEmploi" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MedecinResponsable">
+          <Key>
+            <PropertyRef Name="idPersonne" />
+          </Key>
+          <Property Name="idPersonne" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="interne" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NonSoumis">
+          <Key>
+            <PropertyRef Name="codeEmploi" />
+          </Key>
+          <Property Name="codeEmploi" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Personne">
+          <Key>
+            <PropertyRef Name="idPersonne" />
+          </Key>
+          <Property Name="idPersonne" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="mail" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="GSM" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Fix" Type="varchar" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Profession">
+          <Key>
+            <PropertyRef Name="desProfession" />
+          </Key>
+          <Property Name="desProfession" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Risque">
+          <Key>
+            <PropertyRef Name="codeRisque" />
+          </Key>
+          <Property Name="codeRisque" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Soumis">
+          <Key>
+            <PropertyRef Name="codeEmploi" />
+          </Key>
+          <Property Name="codeEmploi" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Travailleur">
+          <Key>
+            <PropertyRef Name="idPersonne" />
+          </Key>
+          <Property Name="idPersonne" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="numDossier" Type="numeric" Precision="5" Scale="0" />
+        </EntityType>
+        <EntityType Name="TypeLieu">
+          <Key>
+            <PropertyRef Name="idType" />
+          </Key>
+          <Property Name="idType" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="supplementPrix" Type="numeric" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="VisiteMedicale">
+          <Key>
+            <PropertyRef Name="idVisite" />
+          </Key>
+          <Property Name="idVisite" Type="numeric" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="dateVisite" Type="date" Nullable="false" />
+          <Property Name="codeEmploi" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="idType" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="idPersonne" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FKAff_Tra_FK">
+          <End Role="Travailleur" Type="Self.Travailleur" Multiplicity="1" />
+          <End Role="Emploi" Type="Self.Emploi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Travailleur">
+              <PropertyRef Name="idPersonne" />
+            </Principal>
+            <Dependent Role="Emploi">
+              <PropertyRef Name="idPersonne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAffectationExamen_FK">
+          <End Role="MedecinResponsable" Type="Self.MedecinResponsable" Multiplicity="1" />
+          <End Role="VisiteMedicale" Type="Self.VisiteMedicale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedecinResponsable">
+              <PropertyRef Name="idPersonne" />
+            </Principal>
+            <Dependent Role="VisiteMedicale">
+              <PropertyRef Name="idPersonne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAffectationVisMed_FK">
+          <End Role="Emploi" Type="Self.Emploi" Multiplicity="1" />
+          <End Role="VisiteMedicale" Type="Self.VisiteMedicale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emploi">
+              <PropertyRef Name="codeEmploi" />
+            </Principal>
+            <Dependent Role="VisiteMedicale">
+              <PropertyRef Name="codeEmploi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCor_Examen">
+          <End Role="Examen" Type="Self.Examen" Multiplicity="1" />
+          <End Role="Correspondance" Type="Self.Correspondance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examen">
+              <PropertyRef Name="codeExamen" />
+            </Principal>
+            <Dependent Role="Correspondance">
+              <PropertyRef Name="codeExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCor_Risque_FK">
+          <End Role="Risque" Type="Self.Risque" Multiplicity="1" />
+          <End Role="Correspondance" Type="Self.Correspondance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Risque">
+              <PropertyRef Name="codeRisque" />
+            </Principal>
+            <Dependent Role="Correspondance">
+              <PropertyRef Name="codeRisque" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKExp_Risque_FK">
+          <End Role="Risque" Type="Self.Risque" Multiplicity="1" />
+          <End Role="Exposition" Type="Self.Exposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Risque">
+              <PropertyRef Name="codeRisque" />
+            </Principal>
+            <Dependent Role="Exposition">
+              <PropertyRef Name="codeRisque" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKExp_Soumis">
+          <End Role="Soumis" Type="Self.Soumis" Multiplicity="1" />
+          <End Role="Exposition" Type="Self.Exposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Soumis">
+              <PropertyRef Name="codeEmploi" />
+            </Principal>
+            <Dependent Role="Exposition">
+              <PropertyRef Name="codeEmploi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIs_A__FK">
+          <End Role="Personne" Type="Self.Personne" Multiplicity="1" />
+          <End Role="Travailleur" Type="Self.Travailleur" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="idPersonne" />
+            </Principal>
+            <Dependent Role="Travailleur">
+              <PropertyRef Name="idPersonne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIs_A_FK">
+          <End Role="Personne" Type="Self.Personne" Multiplicity="1" />
+          <End Role="MedecinResponsable" Type="Self.MedecinResponsable" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="idPersonne" />
+            </Principal>
+            <Dependent Role="MedecinResponsable">
+              <PropertyRef Name="idPersonne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIs_codeEmploi_FK">
+          <End Role="Emploi" Type="Self.Emploi" Multiplicity="1" />
+          <End Role="NonSoumis" Type="Self.NonSoumis" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Emploi">
+              <PropertyRef Name="codeEmploi" />
+            </Principal>
+            <Dependent Role="NonSoumis">
+              <PropertyRef Name="codeEmploi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIs_codeEmplois_FK">
+          <End Role="Emploi" Type="Self.Emploi" Multiplicity="1" />
+          <End Role="Soumis" Type="Self.Soumis" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Emploi">
+              <PropertyRef Name="codeEmploi" />
+            </Principal>
+            <Dependent Role="Soumis">
+              <PropertyRef Name="codeEmploi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLieu_FK">
+          <End Role="TypeLieu" Type="Self.TypeLieu" Multiplicity="1" />
+          <End Role="VisiteMedicale" Type="Self.VisiteMedicale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeLieu">
+              <PropertyRef Name="idType" />
+            </Principal>
+            <Dependent Role="VisiteMedicale">
+              <PropertyRef Name="idType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKUti_Examen">
+          <End Role="Examen" Type="Self.Examen" Multiplicity="1" />
+          <End Role="ExamenPratique" Type="Self.ExamenPratique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examen">
+              <PropertyRef Name="codeExamen" />
+            </Principal>
+            <Dependent Role="ExamenPratique">
+              <PropertyRef Name="codeExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKUti_Visite_FK">
+          <End Role="VisiteMedicale" Type="Self.VisiteMedicale" Multiplicity="1" />
+          <End Role="ExamenPratique" Type="Self.ExamenPratique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisiteMedicale">
+              <PropertyRef Name="idVisite" />
+            </Principal>
+            <Dependent Role="ExamenPratique">
+              <PropertyRef Name="idVisite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="REF_Emplo_Profe_FK">
+          <End Role="Profession" Type="Self.Profession" Multiplicity="1" />
+          <End Role="Emploi" Type="Self.Emploi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profession">
+              <PropertyRef Name="desProfession" />
+            </Principal>
+            <Dependent Role="Emploi">
+              <PropertyRef Name="Profession" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MeditModelStoreContainer">
+          <EntitySet Name="Correspondance" EntityType="Self.Correspondance" Schema="BD" store:Type="Tables" />
+          <EntitySet Name="Emploi" EntityType="Self.Emploi" Schema="BD" store:Type="Tables" />
+          <EntitySet Name="Examen" EntityType="Self.Examen" Schema="BD" store:Type="Tables" />
+          <EntitySet Name="ExamenPratique" EntityType="Self.ExamenPratique" Schema="BD" store:Type="Tables" />
+          <EntitySet Name="Exposition" EntityType="Self.Exposition" Schema="BD" store:Type="Tables" />
+          <EntitySet Name="MedecinResponsable" EntityType="Self.MedecinResponsable" Schema="BD" store:Type="Tables" />
+          <EntitySet Name="NonSoumis" EntityType="Self.NonSoumis" Schema="BD" store:Type="Tables" />
+          <EntitySet Name="Personne" EntityType="Self.Personne" Schema="BD" store:Type="Tables" />
+          <EntitySet Name="Profession" EntityType="Self.Profession" Schema="BD" store:Type="Tables" />
+          <EntitySet Name="Risque" EntityType="Self.Risque" Schema="BD" store:Type="Tables" />
+          <EntitySet Name="Soumis" EntityType="Self.Soumis" Schema="BD" store:Type="Tables" />
+          <EntitySet Name="Travailleur" EntityType="Self.Travailleur" Schema="BD" store:Type="Tables" />
+          <EntitySet Name="TypeLieu" EntityType="Self.TypeLieu" Schema="BD" store:Type="Tables" />
+          <EntitySet Name="VisiteMedicale" EntityType="Self.VisiteMedicale" Schema="BD" store:Type="Tables" />
+          <AssociationSet Name="FKAff_Tra_FK" Association="Self.FKAff_Tra_FK">
+            <End Role="Travailleur" EntitySet="Travailleur" />
+            <End Role="Emploi" EntitySet="Emploi" />
+          </AssociationSet>
+          <AssociationSet Name="FKAffectationExamen_FK" Association="Self.FKAffectationExamen_FK">
+            <End Role="MedecinResponsable" EntitySet="MedecinResponsable" />
+            <End Role="VisiteMedicale" EntitySet="VisiteMedicale" />
+          </AssociationSet>
+          <AssociationSet Name="FKAffectationVisMed_FK" Association="Self.FKAffectationVisMed_FK">
+            <End Role="Emploi" EntitySet="Emploi" />
+            <End Role="VisiteMedicale" EntitySet="VisiteMedicale" />
+          </AssociationSet>
+          <AssociationSet Name="FKCor_Examen" Association="Self.FKCor_Examen">
+            <End Role="Examen" EntitySet="Examen" />
+            <End Role="Correspondance" EntitySet="Correspondance" />
+          </AssociationSet>
+          <AssociationSet Name="FKCor_Risque_FK" Association="Self.FKCor_Risque_FK">
+            <End Role="Risque" EntitySet="Risque" />
+            <End Role="Correspondance" EntitySet="Correspondance" />
+          </AssociationSet>
+          <AssociationSet Name="FKExp_Risque_FK" Association="Self.FKExp_Risque_FK">
+            <End Role="Risque" EntitySet="Risque" />
+            <End Role="Exposition" EntitySet="Exposition" />
+          </AssociationSet>
+          <AssociationSet Name="FKExp_Soumis" Association="Self.FKExp_Soumis">
+            <End Role="Soumis" EntitySet="Soumis" />
+            <End Role="Exposition" EntitySet="Exposition" />
+          </AssociationSet>
+          <AssociationSet Name="FKIs_A__FK" Association="Self.FKIs_A__FK">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="Travailleur" EntitySet="Travailleur" />
+          </AssociationSet>
+          <AssociationSet Name="FKIs_A_FK" Association="Self.FKIs_A_FK">
+            <End Role="Personne" EntitySet="Personne" />
+            <End Role="MedecinResponsable" EntitySet="MedecinResponsable" />
+          </AssociationSet>
+          <AssociationSet Name="FKIs_codeEmploi_FK" Association="Self.FKIs_codeEmploi_FK">
+            <End Role="Emploi" EntitySet="Emploi" />
+            <End Role="NonSoumis" EntitySet="NonSoumis" />
+          </AssociationSet>
+          <AssociationSet Name="FKIs_codeEmplois_FK" Association="Self.FKIs_codeEmplois_FK">
+            <End Role="Emploi" EntitySet="Emploi" />
+            <End Role="Soumis" EntitySet="Soumis" />
+          </AssociationSet>
+          <AssociationSet Name="FKLieu_FK" Association="Self.FKLieu_FK">
+            <End Role="TypeLieu" EntitySet="TypeLieu" />
+            <End Role="VisiteMedicale" EntitySet="VisiteMedicale" />
+          </AssociationSet>
+          <AssociationSet Name="FKUti_Examen" Association="Self.FKUti_Examen">
+            <End Role="Examen" EntitySet="Examen" />
+            <End Role="ExamenPratique" EntitySet="ExamenPratique" />
+          </AssociationSet>
+          <AssociationSet Name="FKUti_Visite_FK" Association="Self.FKUti_Visite_FK">
+            <End Role="VisiteMedicale" EntitySet="VisiteMedicale" />
+            <End Role="ExamenPratique" EntitySet="ExamenPratique" />
+          </AssociationSet>
+          <AssociationSet Name="REF_Emplo_Profe_FK" Association="Self.REF_Emplo_Profe_FK">
+            <End Role="Profession" EntitySet="Profession" />
+            <End Role="Emploi" EntitySet="Emploi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MeditModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Emploi">
+          <Key>
+            <PropertyRef Name="codeEmploi" />
+          </Key>
+          <Property Name="codeEmploi" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="dateEntre" Type="DateTime" Precision="0" />
+          <Property Name="dateSortie" Type="DateTime" Precision="0" />
+          <Property Name="idPersonne" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="Profession" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Travailleur" Relationship="Self.FKAff_Tra_FK" FromRole="Emploi" ToRole="Travailleur" />
+          <NavigationProperty Name="VisiteMedicales" Relationship="Self.FKAffectationVisMed_FK" FromRole="Emploi" ToRole="VisiteMedicale" />
+          <NavigationProperty Name="NonSoumi" Relationship="Self.FKIs_codeEmploi_FK" FromRole="Emploi" ToRole="NonSoumis" />
+          <NavigationProperty Name="Soumi" Relationship="Self.FKIs_codeEmplois_FK" FromRole="Emploi" ToRole="Soumis" />
+          <NavigationProperty Name="Profession1" Relationship="Self.REF_Emplo_Profe_FK" FromRole="Emploi" ToRole="Profession" />
+        </EntityType>
+        <EntityType Name="Examan">
+          <Key>
+            <PropertyRef Name="codeExamen" />
+          </Key>
+          <Property Name="codeExamen" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prixSoumis" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="prixNonSoumis" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="ExamenPratiques" Relationship="Self.FKUti_Examen" FromRole="Examen" ToRole="ExamenPratique" />
+          <NavigationProperty Name="Risques" Relationship="Self.Correspondance" FromRole="Examen" ToRole="Risque" />
+        </EntityType>
+        <EntityType Name="ExamenPratique">
+          <Key>
+            <PropertyRef Name="idExaPrat" />
+          </Key>
+          <Property Name="idExaPrat" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="idVisite" Type="Decimal" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="codeExamen" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="duree" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="resultat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prixTotal" Type="Decimal" Precision="7" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Examan" Relationship="Self.FKUti_Examen" FromRole="ExamenPratique" ToRole="Examen" />
+          <NavigationProperty Name="VisiteMedicale" Relationship="Self.FKUti_Visite_FK" FromRole="ExamenPratique" ToRole="VisiteMedicale" />
+        </EntityType>
+        <EntityType Name="MedecinResponsable">
+          <Key>
+            <PropertyRef Name="idPersonne" />
+          </Key>
+          <Property Name="idPersonne" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="interne" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="VisiteMedicales" Relationship="Self.FKAffectationExamen_FK" FromRole="MedecinResponsable" ToRole="VisiteMedicale" />
+          <NavigationProperty Name="Personne" Relationship="Self.FKIs_A_FK" FromRole="MedecinResponsable" ToRole="Personne" />
+        </EntityType>
+        <EntityType Name="NonSoumi">
+          <Key>
+            <PropertyRef Name="codeEmploi" />
+          </Key>
+          <Property Name="codeEmploi" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Emploi" Relationship="Self.FKIs_codeEmploi_FK" FromRole="NonSoumis" ToRole="Emploi" />
+        </EntityType>
+        <EntityType Name="Personne">
+          <Key>
+            <PropertyRef Name="idPersonne" />
+          </Key>
+          <Property Name="idPersonne" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="nom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GSM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fix" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MedecinResponsable" Relationship="Self.FKIs_A_FK" FromRole="Personne" ToRole="MedecinResponsable" />
+          <NavigationProperty Name="Travailleur" Relationship="Self.FKIs_A__FK" FromRole="Personne" ToRole="Travailleur" />
+        </EntityType>
+        <EntityType Name="Profession">
+          <Key>
+            <PropertyRef Name="desProfession" />
+          </Key>
+          <Property Name="desProfession" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Emplois" Relationship="Self.REF_Emplo_Profe_FK" FromRole="Profession" ToRole="Emploi" />
+        </EntityType>
+        <EntityType Name="Risque">
+          <Key>
+            <PropertyRef Name="codeRisque" />
+          </Key>
+          <Property Name="codeRisque" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Examen" Relationship="Self.Correspondance" FromRole="Risque" ToRole="Examen" />
+          <NavigationProperty Name="Soumis" Relationship="Self.Exposition" FromRole="Risque" ToRole="Soumis" />
+        </EntityType>
+        <EntityType Name="Soumi">
+          <Key>
+            <PropertyRef Name="codeEmploi" />
+          </Key>
+          <Property Name="codeEmploi" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Emploi" Relationship="Self.FKIs_codeEmplois_FK" FromRole="Soumis" ToRole="Emploi" />
+          <NavigationProperty Name="Risques" Relationship="Self.Exposition" FromRole="Soumis" ToRole="Risque" />
+        </EntityType>
+        <EntityType Name="Travailleur">
+          <Key>
+            <PropertyRef Name="idPersonne" />
+          </Key>
+          <Property Name="idPersonne" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="numDossier" Type="Decimal" Precision="5" Scale="0" />
+          <NavigationProperty Name="Emplois" Relationship="Self.FKAff_Tra_FK" FromRole="Travailleur" ToRole="Emploi" />
+          <NavigationProperty Name="Personne" Relationship="Self.FKIs_A__FK" FromRole="Travailleur" ToRole="Personne" />
+        </EntityType>
+        <EntityType Name="TypeLieu">
+          <Key>
+            <PropertyRef Name="idType" />
+          </Key>
+          <Property Name="idType" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="supplementPrix" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="VisiteMedicales" Relationship="Self.FKLieu_FK" FromRole="TypeLieu" ToRole="VisiteMedicale" />
+        </EntityType>
+        <EntityType Name="VisiteMedicale">
+          <Key>
+            <PropertyRef Name="idVisite" />
+          </Key>
+          <Property Name="idVisite" Type="Decimal" Precision="15" Scale="0" Nullable="false" />
+          <Property Name="dateVisite" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="codeEmploi" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="idType" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <Property Name="idPersonne" Type="Decimal" Precision="5" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Emploi" Relationship="Self.FKAffectationVisMed_FK" FromRole="VisiteMedicale" ToRole="Emploi" />
+          <NavigationProperty Name="ExamenPratiques" Relationship="Self.FKUti_Visite_FK" FromRole="VisiteMedicale" ToRole="ExamenPratique" />
+          <NavigationProperty Name="MedecinResponsable" Relationship="Self.FKAffectationExamen_FK" FromRole="VisiteMedicale" ToRole="MedecinResponsable" />
+          <NavigationProperty Name="TypeLieu" Relationship="Self.FKLieu_FK" FromRole="VisiteMedicale" ToRole="TypeLieu" />
+        </EntityType>
+        <Association Name="FKAff_Tra_FK">
+          <End Role="Travailleur" Type="Self.Travailleur" Multiplicity="1" />
+          <End Role="Emploi" Type="Self.Emploi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Travailleur">
+              <PropertyRef Name="idPersonne" />
+            </Principal>
+            <Dependent Role="Emploi">
+              <PropertyRef Name="idPersonne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAffectationVisMed_FK">
+          <End Role="Emploi" Type="Self.Emploi" Multiplicity="1" />
+          <End Role="VisiteMedicale" Type="Self.VisiteMedicale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emploi">
+              <PropertyRef Name="codeEmploi" />
+            </Principal>
+            <Dependent Role="VisiteMedicale">
+              <PropertyRef Name="codeEmploi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIs_codeEmploi_FK">
+          <End Role="Emploi" Type="Self.Emploi" Multiplicity="1" />
+          <End Role="NonSoumis" Type="Self.NonSoumi" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Emploi">
+              <PropertyRef Name="codeEmploi" />
+            </Principal>
+            <Dependent Role="NonSoumis">
+              <PropertyRef Name="codeEmploi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIs_codeEmplois_FK">
+          <End Role="Emploi" Type="Self.Emploi" Multiplicity="1" />
+          <End Role="Soumis" Type="Self.Soumi" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Emploi">
+              <PropertyRef Name="codeEmploi" />
+            </Principal>
+            <Dependent Role="Soumis">
+              <PropertyRef Name="codeEmploi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="REF_Emplo_Profe_FK">
+          <End Role="Profession" Type="Self.Profession" Multiplicity="1" />
+          <End Role="Emploi" Type="Self.Emploi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profession">
+              <PropertyRef Name="desProfession" />
+            </Principal>
+            <Dependent Role="Emploi">
+              <PropertyRef Name="Profession" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKUti_Examen">
+          <End Role="Examen" Type="Self.Examan" Multiplicity="1" />
+          <End Role="ExamenPratique" Type="Self.ExamenPratique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Examen">
+              <PropertyRef Name="codeExamen" />
+            </Principal>
+            <Dependent Role="ExamenPratique">
+              <PropertyRef Name="codeExamen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKUti_Visite_FK">
+          <End Role="VisiteMedicale" Type="Self.VisiteMedicale" Multiplicity="1" />
+          <End Role="ExamenPratique" Type="Self.ExamenPratique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VisiteMedicale">
+              <PropertyRef Name="idVisite" />
+            </Principal>
+            <Dependent Role="ExamenPratique">
+              <PropertyRef Name="idVisite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAffectationExamen_FK">
+          <End Role="MedecinResponsable" Type="Self.MedecinResponsable" Multiplicity="1" />
+          <End Role="VisiteMedicale" Type="Self.VisiteMedicale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedecinResponsable">
+              <PropertyRef Name="idPersonne" />
+            </Principal>
+            <Dependent Role="VisiteMedicale">
+              <PropertyRef Name="idPersonne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIs_A_FK">
+          <End Role="Personne" Type="Self.Personne" Multiplicity="1" />
+          <End Role="MedecinResponsable" Type="Self.MedecinResponsable" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="idPersonne" />
+            </Principal>
+            <Dependent Role="MedecinResponsable">
+              <PropertyRef Name="idPersonne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKIs_A__FK">
+          <End Role="Personne" Type="Self.Personne" Multiplicity="1" />
+          <End Role="Travailleur" Type="Self.Travailleur" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Personne">
+              <PropertyRef Name="idPersonne" />
+            </Principal>
+            <Dependent Role="Travailleur">
+              <PropertyRef Name="idPersonne" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLieu_FK">
+          <End Role="TypeLieu" Type="Self.TypeLieu" Multiplicity="1" />
+          <End Role="VisiteMedicale" Type="Self.VisiteMedicale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeLieu">
+              <PropertyRef Name="idType" />
+            </Principal>
+            <Dependent Role="VisiteMedicale">
+              <PropertyRef Name="idType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Correspondance">
+          <End Role="Examen" Type="Self.Examan" Multiplicity="*" />
+          <End Role="Risque" Type="Self.Risque" Multiplicity="*" />
+        </Association>
+        <Association Name="Exposition">
+          <End Role="Risque" Type="Self.Risque" Multiplicity="*" />
+          <End Role="Soumis" Type="Self.Soumi" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MeditEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Emplois" EntityType="Self.Emploi" />
+          <EntitySet Name="Examen" EntityType="Self.Examan" />
+          <EntitySet Name="ExamenPratiques" EntityType="Self.ExamenPratique" />
+          <EntitySet Name="MedecinResponsables" EntityType="Self.MedecinResponsable" />
+          <EntitySet Name="NonSoumis" EntityType="Self.NonSoumi" />
+          <EntitySet Name="Personnes" EntityType="Self.Personne" />
+          <EntitySet Name="Professions" EntityType="Self.Profession" />
+          <EntitySet Name="Risques" EntityType="Self.Risque" />
+          <EntitySet Name="Soumis" EntityType="Self.Soumi" />
+          <EntitySet Name="Travailleurs" EntityType="Self.Travailleur" />
+          <EntitySet Name="TypeLieux" EntityType="Self.TypeLieu" />
+          <EntitySet Name="VisiteMedicales" EntityType="Self.VisiteMedicale" />
+          <AssociationSet Name="FKAff_Tra_FK" Association="Self.FKAff_Tra_FK">
+            <End Role="Travailleur" EntitySet="Travailleurs" />
+            <End Role="Emploi" EntitySet="Emplois" />
+          </AssociationSet>
+          <AssociationSet Name="FKAffectationVisMed_FK" Association="Self.FKAffectationVisMed_FK">
+            <End Role="Emploi" EntitySet="Emplois" />
+            <End Role="VisiteMedicale" EntitySet="VisiteMedicales" />
+          </AssociationSet>
+          <AssociationSet Name="FKIs_codeEmploi_FK" Association="Self.FKIs_codeEmploi_FK">
+            <End Role="Emploi" EntitySet="Emplois" />
+            <End Role="NonSoumis" EntitySet="NonSoumis" />
+          </AssociationSet>
+          <AssociationSet Name="FKIs_codeEmplois_FK" Association="Self.FKIs_codeEmplois_FK">
+            <End Role="Emploi" EntitySet="Emplois" />
+            <End Role="Soumis" EntitySet="Soumis" />
+          </AssociationSet>
+          <AssociationSet Name="REF_Emplo_Profe_FK" Association="Self.REF_Emplo_Profe_FK">
+            <End Role="Profession" EntitySet="Professions" />
+            <End Role="Emploi" EntitySet="Emplois" />
+          </AssociationSet>
+          <AssociationSet Name="FKUti_Examen" Association="Self.FKUti_Examen">
+            <End Role="Examen" EntitySet="Examen" />
+            <End Role="ExamenPratique" EntitySet="ExamenPratiques" />
+          </AssociationSet>
+          <AssociationSet Name="FKUti_Visite_FK" Association="Self.FKUti_Visite_FK">
+            <End Role="VisiteMedicale" EntitySet="VisiteMedicales" />
+            <End Role="ExamenPratique" EntitySet="ExamenPratiques" />
+          </AssociationSet>
+          <AssociationSet Name="FKAffectationExamen_FK" Association="Self.FKAffectationExamen_FK">
+            <End Role="MedecinResponsable" EntitySet="MedecinResponsables" />
+            <End Role="VisiteMedicale" EntitySet="VisiteMedicales" />
+          </AssociationSet>
+          <AssociationSet Name="FKIs_A_FK" Association="Self.FKIs_A_FK">
+            <End Role="Personne" EntitySet="Personnes" />
+            <End Role="MedecinResponsable" EntitySet="MedecinResponsables" />
+          </AssociationSet>
+          <AssociationSet Name="FKIs_A__FK" Association="Self.FKIs_A__FK">
+            <End Role="Personne" EntitySet="Personnes" />
+            <End Role="Travailleur" EntitySet="Travailleurs" />
+          </AssociationSet>
+          <AssociationSet Name="FKLieu_FK" Association="Self.FKLieu_FK">
+            <End Role="TypeLieu" EntitySet="TypeLieux" />
+            <End Role="VisiteMedicale" EntitySet="VisiteMedicales" />
+          </AssociationSet>
+          <AssociationSet Name="Correspondance" Association="Self.Correspondance">
+            <End Role="Examen" EntitySet="Examen" />
+            <End Role="Risque" EntitySet="Risques" />
+          </AssociationSet>
+          <AssociationSet Name="Exposition" Association="Self.Exposition">
+            <End Role="Risque" EntitySet="Risques" />
+            <End Role="Soumis" EntitySet="Soumis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MeditModelStoreContainer" CdmEntityContainer="MeditEntities">
+          <EntitySetMapping Name="Emplois">
+            <EntityTypeMapping TypeName="MeditModel.Emploi">
+              <MappingFragment StoreEntitySet="Emploi">
+                <ScalarProperty Name="codeEmploi" ColumnName="codeEmploi" />
+                <ScalarProperty Name="dateEntre" ColumnName="dateEntre" />
+                <ScalarProperty Name="dateSortie" ColumnName="dateSortie" />
+                <ScalarProperty Name="idPersonne" ColumnName="idPersonne" />
+                <ScalarProperty Name="Profession" ColumnName="Profession" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Examen">
+            <EntityTypeMapping TypeName="MeditModel.Examan">
+              <MappingFragment StoreEntitySet="Examen">
+                <ScalarProperty Name="codeExamen" ColumnName="codeExamen" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="prixSoumis" ColumnName="prixSoumis" />
+                <ScalarProperty Name="prixNonSoumis" ColumnName="prixNonSoumis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExamenPratiques">
+            <EntityTypeMapping TypeName="MeditModel.ExamenPratique">
+              <MappingFragment StoreEntitySet="ExamenPratique">
+                <ScalarProperty Name="idExaPrat" ColumnName="idExaPrat" />
+                <ScalarProperty Name="idVisite" ColumnName="idVisite" />
+                <ScalarProperty Name="codeExamen" ColumnName="codeExamen" />
+                <ScalarProperty Name="duree" ColumnName="duree" />
+                <ScalarProperty Name="resultat" ColumnName="resultat" />
+                <ScalarProperty Name="prixTotal" ColumnName="prixTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedecinResponsables">
+            <EntityTypeMapping TypeName="MeditModel.MedecinResponsable">
+              <MappingFragment StoreEntitySet="MedecinResponsable">
+                <ScalarProperty Name="idPersonne" ColumnName="idPersonne" />
+                <ScalarProperty Name="interne" ColumnName="interne" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NonSoumis">
+            <EntityTypeMapping TypeName="MeditModel.NonSoumi">
+              <MappingFragment StoreEntitySet="NonSoumis">
+                <ScalarProperty Name="codeEmploi" ColumnName="codeEmploi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personnes">
+            <EntityTypeMapping TypeName="MeditModel.Personne">
+              <MappingFragment StoreEntitySet="Personne">
+                <ScalarProperty Name="idPersonne" ColumnName="idPersonne" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="GSM" ColumnName="GSM" />
+                <ScalarProperty Name="Fix" ColumnName="Fix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Professions">
+            <EntityTypeMapping TypeName="MeditModel.Profession">
+              <MappingFragment StoreEntitySet="Profession">
+                <ScalarProperty Name="desProfession" ColumnName="desProfession" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Risques">
+            <EntityTypeMapping TypeName="MeditModel.Risque">
+              <MappingFragment StoreEntitySet="Risque">
+                <ScalarProperty Name="codeRisque" ColumnName="codeRisque" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Soumis">
+            <EntityTypeMapping TypeName="MeditModel.Soumi">
+              <MappingFragment StoreEntitySet="Soumis">
+                <ScalarProperty Name="codeEmploi" ColumnName="codeEmploi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Travailleurs">
+            <EntityTypeMapping TypeName="MeditModel.Travailleur">
+              <MappingFragment StoreEntitySet="Travailleur">
+                <ScalarProperty Name="idPersonne" ColumnName="idPersonne" />
+                <ScalarProperty Name="numDossier" ColumnName="numDossier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeLieux">
+            <EntityTypeMapping TypeName="MeditModel.TypeLieu">
+              <MappingFragment StoreEntitySet="TypeLieu">
+                <ScalarProperty Name="idType" ColumnName="idType" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="supplementPrix" ColumnName="supplementPrix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VisiteMedicales">
+            <EntityTypeMapping TypeName="MeditModel.VisiteMedicale">
+              <MappingFragment StoreEntitySet="VisiteMedicale">
+                <ScalarProperty Name="idVisite" ColumnName="idVisite" />
+                <ScalarProperty Name="dateVisite" ColumnName="dateVisite" />
+                <ScalarProperty Name="codeEmploi" ColumnName="codeEmploi" />
+                <ScalarProperty Name="idType" ColumnName="idType" />
+                <ScalarProperty Name="idPersonne" ColumnName="idPersonne" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Correspondance" TypeName="MeditModel.Correspondance" StoreEntitySet="Correspondance">
+            <EndProperty Name="Examen">
+              <ScalarProperty Name="codeExamen" ColumnName="codeExamen" />
+            </EndProperty>
+            <EndProperty Name="Risque">
+              <ScalarProperty Name="codeRisque" ColumnName="codeRisque" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Exposition" TypeName="MeditModel.Exposition" StoreEntitySet="Exposition">
+            <EndProperty Name="Risque">
+              <ScalarProperty Name="codeRisque" ColumnName="codeRisque" />
+            </EndProperty>
+            <EndProperty Name="Soumis">
+              <ScalarProperty Name="codeEmploi" ColumnName="codeEmploi" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

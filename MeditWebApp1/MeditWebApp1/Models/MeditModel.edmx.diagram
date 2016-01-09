@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="928d68629e3e43ec975e4bf82b6493c3" Name="Diagram1">
+        <EntityTypeShape EntityType="MeditModel.Emploi" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeditModel.Examan" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeditModel.ExamenPratique" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeditModel.MedecinResponsable" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeditModel.NonSoumi" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeditModel.Personne" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeditModel.Profession" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeditModel.Risque" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeditModel.Soumi" Width="1.5" PointX="7.5" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeditModel.Travailleur" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeditModel.TypeLieu" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeditModel.VisiteMedicale" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="MeditModel.FKAff_Tra_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeditModel.FKAffectationVisMed_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeditModel.FKIs_codeEmploi_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeditModel.FKIs_codeEmplois_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeditModel.REF_Emplo_Profe_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeditModel.FKUti_Examen" ManuallyRouted="false" />
+        <AssociationConnector Association="MeditModel.FKUti_Visite_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeditModel.FKAffectationExamen_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeditModel.FKIs_A_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeditModel.FKIs_A__FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeditModel.FKLieu_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeditModel.Correspondance" ManuallyRouted="false" />
+        <AssociationConnector Association="MeditModel.Exposition" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
